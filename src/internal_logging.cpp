@@ -30,10 +30,6 @@ void internal_log(
     const ::opentelemetry::sdk::common::AttributeMap& attributes, const char* file, int line
 )
 {
-    if (std::is_constant_evaluated() && OTEL_INTERNAL_LOG_LEVEL < static_cast<int>(level)) {
-        return;
-    }
-
     using ::opentelemetry::sdk::common::internal_log::GlobalLogHandler;
     using ::opentelemetry::sdk::common::internal_log::LogHandler;
 

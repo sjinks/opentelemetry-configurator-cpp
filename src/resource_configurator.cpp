@@ -3,7 +3,12 @@
 
 #include <opentelemetry/sdk/resource/resource.h>
 #include <opentelemetry/sdk/resource/resource_detector.h>
-#include <opentelemetry/sdk/resource/semantic_conventions.h>
+
+#if OPENTELEMETRY_VERSION_MAJOR == 1 && OPENTELEMETRY_VERSION_MINOR < 18
+#    include <opentelemetry/sdk/resource/semantic_conventions.h>
+#else
+#    include <opentelemetry/semconv/service_attributes.h>
+#endif
 
 #include "opentelemetry/configurator/wwa/configurator.h"
 
@@ -27,6 +32,11 @@ namespace wwa::opentelemetry {
 
 ::opentelemetry::sdk::resource::Resource configure_resource(const resource_config_t& opts)
 {
+#if OPENTELEMETRY_VERSION_MAJOR == 1 && OPENTELEMETRY_VERSION_MINOR < 18
+    using ::opentelemetry::sdk::resource::SemanticConventions::kServiceName;
+#else
+    using ::opentelemetry::semconv::service::kServiceName;
+#endif
     ::opentelemetry::sdk::resource::ResourceAttributes attributes;
     std::string schema_url = opts.schema_url;
     for (const auto& detector : opts.detectors) {
@@ -40,7 +50,7 @@ namespace wwa::opentelemetry {
     merge_attributes(attributes, opts.attrs);
 
     if (!opts.service_name.empty()) {
-        attributes[::opentelemetry::sdk::resource::SemanticConventions::kServiceName] = std::string(opts.service_name);
+        attributes[kServiceName] = std::string(opts.service_name);
     }
 
     return ::opentelemetry::sdk::resource::Resource::Create(attributes, schema_url);
