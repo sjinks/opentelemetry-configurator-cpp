@@ -1,0 +1,34 @@
+{
+    "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
+    "dependencies": [
+        "nlohmann-json",
+        "opentelemetry-cpp"
+    ],
+    "features": {
+        "http": {
+            "description": "Use OTLP HTTP exporter",
+            "dependencies": [
+                {
+                    "name": "opentelemetry-cpp",
+                    "features": [
+                        "otlp-http"
+                    ]
+                }
+            ]
+        },
+        "grpc": {
+            "description": "Use OTLP gRPC exporter",
+            "dependencies": [
+                {
+                    "name": "opentelemetry-cpp",
+                    "features": [
+                        "otlp-grpc"
+                    ]
+                }
+            ]
+        }
+    },
+    "default-features": [
+        "http"
+    ]
+}
