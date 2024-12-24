@@ -16,4 +16,5 @@ Checks: <
 FormatStyle:       none
 HeaderFilterRegex: '.*'
 CheckOptions:
-    cppcoreguidelines-rvalue-reference-param-not-moved.AllowPartialMove: true
+    - key: cppcoreguidelines-rvalue-reference-param-not-moved.AllowPartialMove
+      value: true

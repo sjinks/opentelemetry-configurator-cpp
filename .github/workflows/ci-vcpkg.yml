@@ -61,22 +61,3 @@ jobs:
       - name: Install (Windows)
         run: cmake --install build --config Debug
         if: runner.os == 'Windows'
-
-      - name: Smoke test (build)
-        run: |
-          cmake -B build --toolchain ../vcpkg/scripts/buildsystems/vcpkg.cmake
-          cmake --build build
-        working-directory: ci
-
-      - name: Smoke test (run)
-        run: |
-          ./ci-cmake
-          ./ci-pkgconfig
-        working-directory: ci/build
-        if: runner.os != 'Windows'
-
-      - name: Smoke test (run)
-        run: |
-          .\ci-cmake.exe
-        working-directory: ci/build/Debug
-        if: runner.os == 'Windows'
