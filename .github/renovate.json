@@ -13,7 +13,7 @@
       "customType": "regex",
       "fileMatch": ["^vcpkg-configuration\\.json$"],
       "matchStrings": [
-        "\"\\$renovate\": \"datasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?( registryUrl=(?<registryUrl>.*?))?\"\\s\"baseline\":\\s+\"(?<currentValue>.*)\""
+        "\"\\$renovate\": \"datasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?( registryUrl=(?<registryUrl>.*?))?\"\\s+\"baseline\":\\s+\"(?<currentValue>.*)\""
       ],
       "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
     },
