@@ -3,6 +3,7 @@
   "extends": [
     "local>sjinks/.github:renovate-config"
   ],
+  "baseBranches": ["master", "renovate-test"],
   "git-submodules": {
     "enabled": true,
     "versioning": "loose"
