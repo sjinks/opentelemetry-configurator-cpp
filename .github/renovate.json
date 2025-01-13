@@ -11,6 +11,14 @@
   "customManagers": [
     {
       "customType": "regex",
+      "fileMatch": ["^vcpkg-configuration\\.json$"],
+      "matchStrings": [
+        "\"\\$renovate\": \"datasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?( registryUrl=(?<registryUrl>.*?))?\"\\s\"baseline\":\\s+\"(?<currentValue>.*)\""
+      ],
+      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
+    },
+    {
+      "customType": "regex",
       "fileMatch": ["^Dockerfile$"],
       "matchStrings": [
         "# renovate: datasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?( registryUrl=(?<registryUrl>.*?))?\\sENV\\s+.*?_VERSION=(?<currentValue>.*)\\s"
