@@ -12,6 +12,7 @@ namespace {
 
 opentelemetry::sdk::trace::BatchSpanProcessorOptions get_batch_span_processor_options()
 {
+    using wwa::opentelemetry::helpers::get_env_long;
     opentelemetry::sdk::trace::BatchSpanProcessorOptions options;
 
     // OTEL_BSP_EXPORT_TIMEOUT: Maximum allowed time (in milliseconds) to export data (30000): does not seem to be supported

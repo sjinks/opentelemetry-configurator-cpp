@@ -3,7 +3,7 @@
 
 #ifdef WWA_OPENTELEMETRY_CONFIGURATOR_STATIC_DEFINE
 #    define WWA_OPENTELEMETRY_CONFIGURATOR_EXPORT
-#    define WWA_OPENTELEMETRY_CONFIGURATOR_NO_EXPORT
+#    define WWA_OPENTELEMETRY_CONFIGURATOR_NO_EXPORT [[gnu::visibility("hidden")]]
 #else
 #    ifdef wwa_opentelemetry_configurator_EXPORTS
 /* We are building this library; export */

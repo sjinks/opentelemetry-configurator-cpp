@@ -8,9 +8,9 @@
 
 #include "configurator_p.h"
 
-const char* const spaces = " \t\n\r\f\v";
-
 namespace {
+
+const char* const spaces = " \t\n\r\f\v";
 
 bool case_insensitive_compare(std::string_view str1, std::string_view str2)
 {
@@ -19,6 +19,8 @@ bool case_insensitive_compare(std::string_view str1, std::string_view str2)
 }
 
 }  // namespace
+
+namespace wwa::opentelemetry::helpers {
 
 std::string_view trim(std::string_view s)
 {
@@ -164,3 +166,5 @@ std::string get_otlp_protocol(const char* env, const char* backup, const std::st
 
     return value.empty() ? default_value : value;
 }
+
+}  // namespace wwa::opentelemetry::helpers
