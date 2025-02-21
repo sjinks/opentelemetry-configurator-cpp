@@ -23,8 +23,10 @@ using sampler_creator_t = wwa::opentelemetry::tracing_sampler_t (*)();
 
 auto create_traceidratio_sampler()
 {
+    using wwa::opentelemetry::helpers::get_env_double;
+
     const auto ratio = get_env_double("OTEL_TRACES_SAMPLER_ARG", 1.0, 0.0, 1.0);
-    return opentelemetry::sdk::trace::TraceIdRatioBasedSamplerFactory::Create(ratio);
+    return TraceIdRatioBasedSamplerFactory::Create(ratio);
 }
 
 auto create_parentbased_alwayson_sampler()
@@ -65,7 +67,7 @@ tracing_sampler_t configure_tracing_sampler_from_environment(tracing_sampler_con
 {
     auto factory = opts.factory != nullptr ? opts.factory : default_factory_impl;
 
-    if (const auto name = get_env("OTEL_TRACES_SAMPLER"); !name.empty()) {
+    if (const auto name = helpers::get_env("OTEL_TRACES_SAMPLER"); !name.empty()) {
         for (const auto& [key, value] : samplers) {
             if (name == key) {
                 return value();

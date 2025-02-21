@@ -1,7 +1,6 @@
 #include <array>
 #include <format>
 #include <string_view>
-#include <type_traits>
 #include <utility>
 
 #include <opentelemetry/sdk/common/global_log_handler.h>
@@ -46,8 +45,7 @@ void configure_internal_logging_from_environment()
 {
     auto level = ::opentelemetry::sdk::common::internal_log::LogLevel::Info;
 
-    auto log_level = get_env("OTEL_LOG_LEVEL");
-    if (!log_level.empty()) {
+    if (const auto log_level = helpers::get_env("OTEL_LOG_LEVEL"); !log_level.empty()) {
         bool found = false;
         for (const auto& [name, value] : log_levels) {
             if (log_level == name) {

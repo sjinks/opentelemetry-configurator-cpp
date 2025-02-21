@@ -17,7 +17,7 @@ namespace wwa::opentelemetry {
 
 void configure_opentelemetry(opentelemetry_configuration_t&& opts)
 {
-    if (get_env_bool("OTEL_SDK_DISABLED")) {
+    if (helpers::get_env_bool("OTEL_SDK_DISABLED")) {
         return;
     }
 

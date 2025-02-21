@@ -75,8 +75,10 @@ get_propagators(const std::unordered_set<std::string_view>&& names, wwa::opentel
 
 std::unordered_set<std::string_view> get_propagator_names()
 {
-    auto env  = get_env("OTEL_PROPAGATORS");
-    auto list = split_and_trim(env);
+    using namespace wwa::opentelemetry::helpers;
+
+    const auto env  = get_env("OTEL_PROPAGATORS");
+    const auto list = split_and_trim(env);
     if (list.empty()) {
         return {"tracecontext", "baggage"};
     }

@@ -16,6 +16,8 @@ namespace wwa::opentelemetry {
  */
 metric_reader_t get_periodic_exporting_metric_reader(metric_exporter_t&& exporter)
 {
+    using wwa::opentelemetry::helpers::get_env_long;
+
     static bool initialized = false;
     static ::opentelemetry::sdk::metrics::PeriodicExportingMetricReaderOptions options;
 

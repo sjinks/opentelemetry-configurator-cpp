@@ -21,6 +21,7 @@ namespace {
 
 wwa::opentelemetry::log_record_exporter_t configure_otlp()
 {
+    using wwa::opentelemetry::helpers::get_otlp_protocol;
     const auto protocol =
         get_otlp_protocol("OTEL_EXPORTER_OTLP_LOGS_PROTOCOL", "OTEL_EXPORTER_OTLP_PROTOCOL", "http/protobuf");
 
@@ -60,8 +61,8 @@ namespace wwa::opentelemetry {
 std::vector<log_record_exporter_t>
 configure_log_record_exporters_from_environment(const log_record_exporter_config_t& opts)
 {
-    const auto exporters_env = get_env("OTEL_LOGS_EXPORTER");
-    auto names               = split_and_trim(exporters_env);
+    const auto exporters_env = helpers::get_env("OTEL_LOGS_EXPORTER");
+    auto names               = helpers::split_and_trim(exporters_env);
 
     if (names.size() == 1 && names[0] == "none") {
         INTERNAL_LOG_WARN("OTEL_LOGS_EXPORTER contains \"none\". Logging will not be initialized.");

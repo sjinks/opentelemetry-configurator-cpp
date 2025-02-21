@@ -13,6 +13,7 @@ namespace {
 
 opentelemetry::sdk::logs::BatchLogRecordProcessorOptions get_batch_log_record_processor_options()
 {
+    using wwa::opentelemetry::helpers::get_env_long;
     opentelemetry::sdk::logs::BatchLogRecordProcessorOptions options;
 
     // OTEL_BLRP_EXPORT_TIMEOUT: Maximum allowed time (in milliseconds) to export data (30000): does not seem to be supported

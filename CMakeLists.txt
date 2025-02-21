@@ -17,8 +17,8 @@ if(DEFINED VCPKG_TOOLCHAIN)
     endif()
 endif()
 
-set(EXPORT_COMPILE_COMMANDS ON)
-project(wwa_opentelemetry_configurator VERSION 1.0.0 LANGUAGES CXX)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+project(wwa_opentelemetry_configurator VERSION 1.0.1 LANGUAGES CXX)
 set(CMAKE_VERBOSE_MAKEFILE ON)
 
 find_package(opentelemetry-cpp CONFIG REQUIRED)
