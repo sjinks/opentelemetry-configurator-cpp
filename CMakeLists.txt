@@ -23,10 +23,12 @@ set(CMAKE_VERBOSE_MAKEFILE ON)
 
 find_package(opentelemetry-cpp CONFIG REQUIRED)
 
-include(CheckCXXCompilerFlag)
-check_cxx_compiler_flag("-Wall" COMPILER_SUPPORTS_WALL)
-check_cxx_compiler_flag("-Wextra" COMPILER_SUPPORTS_WEXTRA)
-check_cxx_compiler_flag("-pedantic" COMPILER_SUPPORTS_PEDANTIC)
+if(CMAKE_COMPILER_IS_GNU OR CMAKE_COMPILER_IS_CLANG)
+    include(CheckCXXCompilerFlag)
+    check_cxx_compiler_flag("-Wall" COMPILER_SUPPORTS_WALL)
+    check_cxx_compiler_flag("-Wextra" COMPILER_SUPPORTS_WEXTRA)
+    check_cxx_compiler_flag("-pedantic" COMPILER_SUPPORTS_PEDANTIC)
+endif()
 
 if(CMAKE_CONFIGURATION_TYPES)
     list(APPEND CMAKE_CONFIGURATION_TYPES "Coverage" "ASAN" "LSAN" "TSAN" "UBSAN")
