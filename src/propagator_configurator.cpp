@@ -79,18 +79,16 @@ std::unordered_set<std::string_view> get_propagator_names()
 
     const auto env  = get_env("OTEL_PROPAGATORS");
     const auto list = split_and_trim(env);
-    if (list.empty()) {
-        return {"tracecontext", "baggage"};
-    }
-
     std::unordered_set<std::string_view> names(list.begin(), list.end());
-    if (names.size() == 1 && names.count("none") == 1) {
-        return {};
+    if (names.empty()) {
+        names = {"tracecontext", "baggage"};
     }
-
-    if (names.count("none") == 1) {
+    else if (names.size() == 1 && names.count("none") == 1) {
+        names.clear();
+    }
+    else if (names.count("none") == 1) {
         INTERNAL_LOG_WARN("OTEL_PROPAGATORS contains <none> along with other propagators. Using default propagators.");
-        return {"tracecontext", "baggage"};
+        names = {"tracecontext", "baggage"};
     }
 
     return names;
