@@ -5,11 +5,11 @@
 #include <utility>
 #include <vector>
 
-#if !defined(OTEL_METRICS_EXPORTER_OTLP_GRPC_DISABLED)
+#ifndef OTEL_METRICS_EXPORTER_OTLP_GRPC_DISABLED
 #    include <opentelemetry/exporters/otlp/otlp_grpc_metric_exporter_factory.h>
 #endif
 
-#if !defined(OTEL_METRICS_EXPORTER_OTLP_HTTP_DISABLED)
+#ifndef OTEL_METRICS_EXPORTER_OTLP_HTTP_DISABLED
 #    include <opentelemetry/exporters/otlp/otlp_http_metric_exporter_factory.h>
 #endif
 
@@ -26,13 +26,13 @@ wwa::opentelemetry::metric_exporter_t configure_otlp()
     const auto protocol =
         get_otlp_protocol("OTEL_EXPORTER_OTLP_METRICS_PROTOCOL", "OTEL_EXPORTER_OTLP_PROTOCOL", "http/protobuf");
 
-#if !defined(OTEL_METRICS_EXPORTER_OTLP_GRPC_DISABLED)
+#ifndef OTEL_METRICS_EXPORTER_OTLP_GRPC_DISABLED
     if (protocol == "grpc") {
         return opentelemetry::exporter::otlp::OtlpGrpcMetricExporterFactory::Create();
     }
 #endif
 
-#if !defined(OTEL_METRICS_EXPORTER_OTLP_HTTP_DISABLED)
+#ifndef OTEL_METRICS_EXPORTER_OTLP_HTTP_DISABLED
     if (protocol.starts_with("http/")) {
         return opentelemetry::exporter::otlp::OtlpHttpMetricExporterFactory::Create();
     }
